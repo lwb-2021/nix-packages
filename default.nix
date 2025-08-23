@@ -17,8 +17,7 @@
   overlays = import ./overlays; # nixpkgs overlays
 
   example-package = pkgs.callPackage ./pkgs/example-package { };
-  cajviewer = pkgs.callPackage ./pkgs/cajviewer.nix { };
-  libtiff_4_5 = pkgs.callPackage ./pkgs/libtiff_4_5 { };
+  cajviewer = pkgs.callPackage ./pkgs/cajviewer { };
   # some-qt5-package = pkgs.libsForQt5.callPackage ./pkgs/some-qt5-package { };
   # ...
 }
