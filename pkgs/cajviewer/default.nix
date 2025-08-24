@@ -4,6 +4,7 @@
   fetchpatch,
   makeWrapper,
   buildFHSEnv,
+  lib,
 
   # Dependencies
   libX11,
@@ -32,7 +33,7 @@ let
     stdenv.cc.cc.lib
   ];
   inner = stdenv.mkDerivation rec {
-    pname = "CAJViewer-unwrapped";
+    pname = "CAJViewer";
     version = "9.0";
     src = fetchurl {
       url = "https://download.cnki.net/cajPackage/CAJLinuxPackage/cajviewer_${version}_amd64.deb";
@@ -58,7 +59,7 @@ let
 
 in
 buildFHSEnv {
-  pname = "CAJViewer";
+  inherit (inner) pname version;
 
   runScript = ''
     env QT_QPA_PLATFORM="xcb" QT_DEBUG_PLUGINS=1 ${inner}/opt/cajviewer/bin/start.sh "$@"
@@ -125,4 +126,11 @@ buildFHSEnv {
   # shellHook = ''
   #   export
   # '';
+  meta = with lib; {
+    description = "A reader for CAJ, NH, KDH, CEB, PDF documents used in China Academic Journals";
+    longDescription = '''';
+    homepage = "";
+    license = licenses.unlicense;
+    platforms = platforms.linux;
+  };
 }
